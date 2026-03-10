@@ -7,7 +7,7 @@ This repository contains OpenClaw agent skills that you can install from [ClawHu
 | Skill | Description |
 |-------|-------------|
 | **bitcoin-price-feed** | Real-time streaming Bitcoin price feed over WebSocket: OHLC ticks, volume, and derived metrics (moving averages, % change) from the Bitquery API. |
-| **pumpfun-token-feed** | Real-time streaming PumpFun token feed on Solana with live USD pricing: OHLC, volume, moving averages, and tick-to-tick % change from the Bitquery API. |
+| **pumpfun-usd-price-stream** | Real-time streaming PumpFun token feed on Solana with live USD pricing: OHLC, volume, moving averages, and tick-to-tick % change from the Bitquery API. |
 
 ---
 
@@ -58,7 +58,7 @@ clawhub whoami
 
 ```bash
 clawhub search "bitcoin price feed"
-clawhub search "pumpfun token"
+clawhub search "pumpfun price"
 ```
 
 ### 3. Install the skills
@@ -70,17 +70,17 @@ Install one or both skills by name (slug):
 clawhub install bitcoin-price-feed
 
 # PumpFun token feed — real-time streaming PumpFun tokens on Solana (USD) from Bitquery
-clawhub install pumpfun-token-feed
+clawhub install pumpfun-usd-price-stream
 
 # Install both at once
-clawhub install bitcoin-price-feed pumpfun-token-feed
+clawhub install bitcoin-price-feed pumpfun-usd-price-stream
 ```
 
 ### 4. Install a specific version (optional)
 
 ```bash
 clawhub install bitcoin-price-feed@1.0.0
-clawhub install pumpfun-token-feed --version 1.0.0
+clawhub install pumpfun-usd-price-stream --version 1.0.0
 ```
 
 ### 5. Verify installation
@@ -116,7 +116,7 @@ clawhub update --all
 
 # Update one skill
 clawhub update bitcoin-price-feed
-clawhub update pumpfun-token-feed
+clawhub update pumpfun-usd-price-stream
 
 # Overwrite local changes when updating
 clawhub update bitcoin-price-feed --force
@@ -130,7 +130,7 @@ clawhub update bitcoin-price-feed --force
 |--------|--------|
 | Search | `clawhub search "query"` |
 | Install | `clawhub install bitcoin-price-feed` |
-| Install both | `clawhub install bitcoin-price-feed pumpfun-token-feed` |
+| Install both | `clawhub install bitcoin-price-feed pumpfun-usd-price-stream` |
 | List installed | `clawhub list` |
 | Update all | `clawhub update --all` |
 | Skill info | `clawhub info bitcoin-price-feed` |
