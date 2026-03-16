@@ -28,7 +28,7 @@ Tokens are filtered to Solana network addresses containing "pump" (PumpFun token
 This skill implements a Bitquery WebSocket PumpFun token feed and uses one external dependency and one credential. Before installing:
 
 1. **Registry metadata**: The registry may not list `BITQUERY_API_KEY` even though this skill and its script require it. Ask the publisher or update the registry metadata before installing so installers surface the secret requirement.
-2. **API key in URL**: The API key must be passed in the WebSocket URL as a query parameter, which can leak to logs or histories. Avoid printing the full URL, store the key in a secure environment variable, and rotate it if it may have been exposed.
+2. **Token only via URL**: Bitquery supports **no other auth method** — the token can **only** be passed in the WebSocket URL as `?token=...`. Because the token always appears in the URL, it can leak to logs, proxy logs, shell history, or IDE history. Never print or log the full URL; store the key only in an environment variable; rotate the key if it may have been exposed.
 3. **Sandbox first**: Review and run the included script in a sandboxed environment (e.g. a virtualenv) to confirm behavior and limit blast radius.
 4. **Source and publisher**: If the skill’s homepage or source is unknown, consider verifying the publisher or using an alternative with a verified source. If the registry metadata declares `BITQUERY_API_KEY` and the source/publisher are validated, this skill is likely coherent and benign.
 
@@ -36,7 +36,13 @@ This skill implements a Bitquery WebSocket PumpFun token feed and uses one exter
 
 ## Prerequisites
 
-- **Environment**: `BITQUERY_API_KEY` — your Bitquery API token (required). The token **must be passed in the WebSocket URL only** as `?token=...` (e.g. `wss://streaming.bitquery.io/graphql?token=YOUR_KEY`); Bitquery does not support header-based auth for this endpoint. Because the token appears in the URL, it can show up in logs, monitoring tools, or browser/IDE history — treat it as a secret and avoid logging or printing the full URL.
+- **Environment**: `BITQUERY_API_KEY` — your Bitquery API token (required).
+
+**Credential and URL-only auth:** The Bitquery streaming endpoint accepts the token **only in the WebSocket URL** as a query parameter (`?token=...`). It does **not** support header-based auth or any other method. Therefore:
+  - The token will always be present in the connection URL and can be exposed in **logs, proxy logs, shell history, or IDE history** if the URL is printed or logged.
+  - **Do not** print or log the full WebSocket URL. Build the URL in code from an env var (e.g. `os.getenv("BITQUERY_API_KEY")`) and never emit it.
+  - Store the key only in an environment variable; **rotate the key** if you suspect it was exposed (e.g. URL was logged or committed).
+
 - **Runtime**: Python 3 and `pip`. Install the dependency: `pip install 'gql[websockets]'`.
 
 ---

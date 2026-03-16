@@ -34,7 +34,7 @@ Trades are filtered to `TransactionStatus.Success: true`. The stream uses Bitque
 This skill's code implements the described Polymarket stream and contacts only Bitquery. Before installing:
 
 1. **Registry metadata**: Confirm the registry metadata declares **`BITQUERY_API_KEY`** as a required credential. The skill will fail at runtime without it. If the registry does not list this env var, the mismatch with this SKILL.md is the main inconsistency — ask the publisher to update the registry so installers see the requirement.
-2. **Treat the API key as a secret**: Set it in an environment variable only. Do **not** print or log the full WebSocket URL; the token is passed as `?token=...` and can appear in logs, shell history, or monitoring tools. Rotate the key if you suspect it was exposed during testing or use.
+2. **Token only via URL**: Bitquery supports **no other auth method** — the token can **only** be passed in the WebSocket URL as `?token=...`. Because the token always appears in the URL, it can leak to logs, proxy logs, shell history, or IDE history. Never print or log the full URL; store the key only in an environment variable; rotate the key if it may have been exposed.
 3. **Sandbox first**: Run the bundled script in a sandboxed environment (e.g. virtualenv or container) to observe behavior before relying on it in production.
 4. **Verify publisher/source**: If the skill's homepage or source is unknown, verify the publisher or use an alternative from a trusted source. If the registry declares `BITQUERY_API_KEY` and the source is validated, this skill is coherent with its stated purpose.
 5. **Rotate the key if exposed**: If the key may have been exposed (e.g. URL printed, committed, or logged), rotate it in the Bitquery dashboard and update your environment.
@@ -45,13 +45,17 @@ This skill's code implements the described Polymarket stream and contacts only B
 
 - **Single required secret at runtime:** `BITQUERY_API_KEY` (Bitquery API token).
 - **Registry:** The registry metadata should declare this as the primary/required credential. If it does not, installers may not see that the skill needs an API key until they read this SKILL.md or run the script — that mismatch is the main inconsistency to fix on the registry side.
-- **Usage:** The key must be passed in the WebSocket URL as a query parameter (`?token=...`); Bitquery does not support header-based auth for this endpoint. Because the token appears in the URL, there is a higher risk of accidental exposure if the URL is printed or captured. **Best practice:** set `BITQUERY_API_KEY` in the environment, never log or print the full WebSocket URL, and rotate the key if you suspect exposure.
+
+**Credential and URL-only auth:** The Bitquery streaming endpoint accepts the token **only in the WebSocket URL** as a query parameter (`?token=...`). It does **not** support header-based auth or any other method. Therefore:
+  - The token will always be present in the connection URL and can be exposed in **logs, proxy logs, shell history, or IDE history** if the URL is printed or logged.
+  - **Do not** print or log the full WebSocket URL. Build the URL in code from an env var (e.g. `os.getenv("BITQUERY_API_KEY")`) and never emit it.
+  - Store the key only in an environment variable; **rotate the key** if you suspect it was exposed (e.g. URL was logged or committed).
 
 ---
 
 ## Prerequisites
 
-- **Environment**: `BITQUERY_API_KEY` — your Bitquery API token (required). Set it in your environment; the script and examples read it from there. The token is passed in the WebSocket URL only as `?token=...` — do not print or log the full URL.
+- **Environment**: `BITQUERY_API_KEY` — your Bitquery API token (required). Set it in your environment; the script and examples read it from there. See **Credential and URL-only auth** above — token only in URL; do not print or log the full URL.
 - **Runtime**: Python 3 and `pip`. Install the dependency: `pip install 'gql[websockets]'`.
 
 ---
