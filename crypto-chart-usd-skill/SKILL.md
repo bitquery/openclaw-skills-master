@@ -1,12 +1,13 @@
 ---
 name: crypto-chart-usd
 description: >
-  Real-time streaming crypto token feed for charting with 1-second OHLC ticks and USD pricing.
-  Use this skill to subscribe to a live multi-token stream over WebSocket: OHLC, volume
-  (Base/Quote/USD), and USD pricing (OHLC, moving averages) streamed in real time from the
+  Real-time streaming crypto token feed for charting with 1-second OHLC ticks and USD pricing
+  across Arbitrum, Base, Matic, Ethereum, Solana, Binance Smart Chain, Tron, and Optimism — all
+  tokens on these chains. Use this skill to subscribe to a live multi-token, multi-chain stream
+  over WebSocket: OHLC, volume (Base/Quote/USD), and USD pricing (OHLC, moving averages) from the
   Bitquery Trading.Tokens API. ALWAYS use this skill when the user asks for crypto charting,
   multi-token USD prices, 1-second or 1s tick data, streaming token OHLC for charting,
-  real-time crypto chart data, or live OHLC/volume for multiple tokens. Trigger for:
+  real-time crypto chart data, or live OHLC/volume for multiple tokens or chains. Trigger for:
   "crypto chart", "crypto charting", "USD pricing", "1 second ticks", "1s candles",
   "streaming token OHLC", "multi-token chart", "Bitquery Trading.Tokens", "real-time
   crypto charting", or any request for a live multi-token chart feed with USD. Do not wait
@@ -16,13 +17,15 @@ description: >
 
 # Crypto charting with USD pricing (1s)
 
-This skill gives you a **real-time streaming multi-token crypto feed** over WebSocket for charting: **1-second** OHLC ticks, volume (Base, Quote, USD), and USD pricing (OHLC, moving averages) for all tokens in the stream. Data is streamed in real time from the Bitquery Trading.Tokens API — no polling. Default interval is **1 second** (duration 1).
+This skill gives you a **real-time streaming multi-token, multi-chain crypto feed** over WebSocket for charting: **1-second** OHLC ticks, volume (Base, Quote, USD), and USD pricing (OHLC, moving averages) for **all tokens** on the supported chains. Data is streamed in real time from the Bitquery Trading.Tokens API — no polling. Default interval is **1 second** (duration 1).
+
+**Supported networks:** Arbitrum, Base, Matic (Polygon), Ethereum, Solana, Binance Smart Chain, Tron, Optimism. The subscription returns tokens across all of these; use the `Token.Network` field to filter or group by chain.
 
 **When to use this skill**
 
-- **Chart multiple tokens** with 1-second OHLC and USD volume
+- **Chart multiple tokens** across chains with 1-second OHLC and USD volume
 - Get **USD pricing** where available (`Price.IsQuotedInUsd`); OHLC and averages in USD
-- Live multi-token feed for dashboards and charting (no single-token filter)
+- Live multi-token, multi-chain feed for dashboards and charting (no single-token or single-network filter)
 
 ---
 
@@ -131,7 +134,7 @@ asyncio.run(main())
 
 ## Step 3 — What you get on the stream
 
-Each tick can contain **multiple tokens**. For each token you get **1-second** OHLC and interval data:
+Each tick can contain **multiple tokens** from any of the supported chains (Arbitrum, Base, Matic, Ethereum, Solana, Binance Smart Chain, Tron, Optimism). For each token you get **1-second** OHLC and interval data:
 
 - **Token**: Address, Id, IsNative, Name, Network, Symbol, TokenId
 - **Block**: Date, Time, Timestamp
@@ -162,6 +165,10 @@ The default subscription uses **duration 1** (1-second tick/candle data). The sa
 - **WebSocket connection failed / 401**: Token invalid or expired (auth is via URL `?token=` only — do not pass the token in headers)
 - **Subscription errors in payload**: Log the error message and stop cleanly (send complete, close transport)
 - **No ticks received**: Check token and network; Bitquery may need a moment to send the first tick; multi-token stream can be bursty
+
+## Supported networks
+
+The feed includes tokens from: **Arbitrum**, **Base**, **Matic** (Polygon), **Ethereum**, **Solana**, **Binance Smart Chain**, **Tron**, **Optimism**. Filter by network in the subscription `where` clause (e.g. `Token: { Network: { is: "ethereum" } }`) or use `Token.Network` in your code to group or filter results. See `references/graphql-fields.md` for filter options.
 
 ## Reference
 

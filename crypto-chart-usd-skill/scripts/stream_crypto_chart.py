@@ -1,8 +1,10 @@
 """
 Bitquery Crypto Chart USD — Real-time streaming (1-second ticks)
 ================================================================
-Subscribe to the Bitquery WebSocket API for a live multi-token crypto chart feed
-with 1-second OHLC, volume (Base/Quote/USD), and USD pricing (OHLC, moving averages).
+Subscribe to the Bitquery WebSocket API for a live multi-token, multi-chain crypto chart
+feed with 1-second OHLC, volume (Base/Quote/USD), and USD pricing (OHLC, moving averages).
+Supports: Arbitrum, Base, Matic, Ethereum, Solana, Binance Smart Chain, Tron, Optimism —
+all tokens on these chains.
 
 Usage:
     python scripts/stream_crypto_chart.py

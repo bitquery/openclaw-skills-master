@@ -1,6 +1,6 @@
 # Bitquery Trading.Tokens — GraphQL Field Reference
 
-Full reference for the fields available in the `Trading.Tokens` **query** and **subscription** on the Bitquery streaming API. For real-time streaming, use a `subscription` with the same structure (no `limit`/`orderBy`); this skill uses the subscription for the multi-token 1-second chart feed with USD pricing.
+Full reference for the fields available in the `Trading.Tokens` **query** and **subscription** on the Bitquery streaming API. For real-time streaming, use a `subscription` with the same structure (no `limit`/`orderBy`); this skill uses the subscription for the multi-token, multi-chain 1-second chart feed with USD pricing. Supported networks: Arbitrum, Base, Matic, Ethereum, Solana, Binance Smart Chain, Tron, Optimism.
 
 ## Query / Subscription Structure
 
@@ -33,6 +33,9 @@ Full reference for the fields available in the `Trading.Tokens` **query** and **
 | `Currency.Id.is` | Match a specific token by Bitquery ID | `"bid:bitcoin"` |
 | `Currency.SmartContract.is` | Match by contract address | `"0xabc...def"` |
 | `Currency.Symbol.is` | Match by ticker symbol | `"BTC"` |
+| `Token.Network.is` | Filter by chain (see supported networks below) | `"Ethereum"`, `"Solana"` |
+
+**Supported networks (this skill):** Arbitrum, Base, Matic, Ethereum, Solana, Binance Smart Chain, Tron, Optimism. Use `Token.Network.is` in the `where` clause to restrict to one chain.
 
 **Common `bid:` token IDs:**
 - `bid:bitcoin` — Bitcoin
