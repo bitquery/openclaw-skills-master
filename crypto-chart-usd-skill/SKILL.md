@@ -6,15 +6,11 @@ description: >
   tokens on these chains. Subscribe to a live multi-token, multi-chain stream over WebSocket:
   OHLC, volume (Base/Quote/USD), and USD pricing (OHLC, moving averages) from the Bitquery
   Trading.Tokens API.
-credentials:
-  - name: BITQUERY_API_KEY
-    description: Your Bitquery API token (required for WebSocket connection)
-trigger_phrases:
-  - crypto charting with USD pricing
-  - 1-second or 1s OHLC ticks
-  - streaming token chart data
-  - multi-token multi-chain feed
-  - Bitquery Trading.Tokens subscription
+requires:
+  env:
+    - name: BITQUERY_API_KEY
+      required: true
+      description: Your Bitquery API token (required for WebSocket connection)
 ---
 
 # Crypto charting with USD pricing (1s)

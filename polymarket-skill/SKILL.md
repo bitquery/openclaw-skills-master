@@ -7,15 +7,11 @@ description: >
   resolution source, outcome labels), and transaction details — streamed in real time from the
   Bitquery GraphQL API. Covers all Polymarket markets including sports odds, Bitcoin Up or Down
   (and other crypto up/down markets), and general prediction markets.
-credentials:
-  - name: BITQUERY_API_KEY
-    description: Your Bitquery API token (required for WebSocket connection)
-trigger_phrases:
-  - Polymarket prediction trades streaming
-  - Live order flow on Polymarket
-  - Real-time prediction market activity
-  - Polymarket sports odds feed
-  - Bitcoin up/down markets on Polygon
+requires:
+  env:
+    - name: BITQUERY_API_KEY
+      required: true
+      description: Your Bitquery API token (required for WebSocket connection)
 ---
 
 # Polymarket Prediction Trades — real-time streaming on Polygon
