@@ -1,5 +1,5 @@
 ---
-name: stablecoin-payments
+name: solana-stablecoin-payments-tracking
 description: >
   Real-time streaming Solana SPL stablecoin transfers (USDT and USDC) over WebSocket from the
   Bitquery GraphQL API. Subscribes to Transfers filtered by USDT/USDC mints and excludes
