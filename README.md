@@ -10,6 +10,7 @@ This repository contains OpenClaw agent skills that you can install from [ClawHu
 | **crypto-chart-usd** | Real-time streaming multi-token crypto chart feed with 1-second OHLC ticks and USD pricing: OHLC, volume (Base/Quote/USD), and moving averages from the Bitquery Trading.Tokens API. |
 | **pumpfun-usd-price-stream** | Real-time streaming PumpFun token feed on Solana with live USD pricing: OHLC, volume, moving averages, and tick-to-tick % change from the Bitquery API. |
 | **polymarket-real-time-trades** | Real-time streaming Polymarket prediction trades on Polygon (matic): outcome trades, buyer/seller, collateral in USD, market question, outcome labels, and transaction details from the Bitquery API. |
+| **stablecoin-payments** | Real-time streaming Solana SPL USDC and USDT transfers over WebSocket (mint filter; excludes program methods containing "swap"), with amounts, USD values, sender/receiver, block time/slot, transaction signature/fees, and program method from Bitquery. |
 
 ---
 
@@ -63,6 +64,7 @@ clawhub search "bitcoin price feed"
 clawhub search "crypto chart"
 clawhub search "pumpfun price"
 clawhub search "polymarket"
+clawhub search "stablecoin solana"
 ```
 
 ### 3. Install the skills
@@ -82,8 +84,11 @@ clawhub install polymarket-real-time-trades
 # Crypto chart USD — real-time 1-second multi-token OHLC/volume/USD from Bitquery
 clawhub install crypto-chart-usd
 
+# Stablecoin payments — real-time Solana USDC/USDT transfers from Bitquery
+clawhub install stablecoin-payments
+
 # Install multiple at once
-clawhub install bitcoin-price-feed crypto-chart-usd pumpfun-usd-price-stream polymarket-real-time-trades
+clawhub install bitcoin-price-feed crypto-chart-usd pumpfun-usd-price-stream polymarket-real-time-trades stablecoin-payments
 ```
 
 ### 4. Install a specific version (optional)
@@ -93,6 +98,7 @@ clawhub install bitcoin-price-feed@1.0.0
 clawhub install pumpfun-usd-price-stream --version 1.0.0
 clawhub install polymarket-real-time-trades@1.0.0
 clawhub install crypto-chart-usd@1.0.0
+clawhub install stablecoin-payments@1.0.0
 ```
 
 ### 5. Verify installation
@@ -131,6 +137,7 @@ clawhub update bitcoin-price-feed
 clawhub update pumpfun-usd-price-stream
 clawhub update polymarket-real-time-trades
 clawhub update crypto-chart-usd
+clawhub update stablecoin-payments
 
 # Overwrite local changes when updating
 clawhub update bitcoin-price-feed --force
@@ -144,7 +151,7 @@ clawhub update bitcoin-price-feed --force
 |--------|--------|
 | Search | `clawhub search "query"` |
 | Install | `clawhub install bitcoin-price-feed` |
-| Install multiple | `clawhub install bitcoin-price-feed crypto-chart-usd pumpfun-usd-price-stream polymarket-real-time-trades` |
+| Install multiple | `clawhub install bitcoin-price-feed crypto-chart-usd pumpfun-usd-price-stream polymarket-real-time-trades stablecoin-payments` |
 | List installed | `clawhub list` |
 | Update all | `clawhub update --all` |
 | Skill info | `clawhub info bitcoin-price-feed` |
