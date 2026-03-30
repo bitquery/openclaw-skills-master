@@ -4,13 +4,25 @@ This repository contains OpenClaw agent skills that you can install from [ClawHu
 
 ## Skills in this repo
 
-| Skill | Description |
-|-------|-------------|
-| **bitcoin-price-feed** | Real-time streaming Bitcoin price feed over WebSocket: OHLC ticks, volume, and derived metrics (moving averages, % change) from the Bitquery API. |
-| **crypto-chart-usd** | Real-time streaming multi-token crypto chart feed with 1-second OHLC ticks and USD pricing: OHLC, volume (Base/Quote/USD), and moving averages from the Bitquery Trading.Tokens API. |
-| **pumpfun-usd-price-stream** | Real-time streaming PumpFun token feed on Solana with live USD pricing: OHLC, volume, moving averages, and tick-to-tick % change from the Bitquery API. |
-| **polymarket-real-time-trades** | Real-time streaming Polymarket prediction trades on Polygon (matic): outcome trades, buyer/seller, collateral in USD, market question, outcome labels, and transaction details from the Bitquery API. |
-| **stablecoin-payments** | Real-time streaming Solana SPL USDC and USDT transfers over WebSocket (mint filter; excludes program methods containing "swap"), with amounts, USD values, sender/receiver, block time/slot, transaction signature/fees, and program method from Bitquery. |
+ClawHub listings:
+
+| `clawhub install` | ClawHub listing | Description |
+|-------------------|-----------------|-------------|
+| **bitcoin-price-feed** | [bitquery-crypto-price-stream](https://clawhub.ai/divyn/bitquery-crypto-price-stream) | Real-time streaming Bitcoin price feed over WebSocket: OHLC ticks, volume, and derived metrics (moving averages, % change) from the Bitquery API. |
+| **crypto-chart-usd** | [crypto-chart-usd](https://clawhub.ai/divyn/crypto-chart-usd) | Real-time streaming multi-token crypto chart feed with 1-second OHLC ticks and USD pricing: OHLC, volume (Base/Quote/USD), and moving averages from the Bitquery Trading.Tokens API. |
+| **pumpfun-usd-price-stream** | [pumpfun-usd-price-stream](https://clawhub.ai/divyn/pumpfun-usd-price-stream) | Real-time streaming PumpFun token feed on Solana with live USD pricing: OHLC, volume, moving averages, and tick-to-tick % change from the Bitquery API. |
+| **polymarket-real-time-trades** | [polymarket-real-time-trades](https://clawhub.ai/divyn/polymarket-real-time-trades) | Real-time streaming Polymarket prediction trades on Polygon (matic): outcome trades, buyer/seller, collateral in USD, market question, outcome labels, and transaction details from the Bitquery API. |
+| **stablecoin-payments** | [solana-stablecoin-payments-tracking](https://clawhub.ai/divyn/solana-stablecoin-payments-tracking) | Real-time streaming Solana SPL USDC and USDT transfers over WebSocket (mint filter; excludes program methods containing "swap"), with amounts, USD values, sender/receiver, block time/slot, transaction signature/fees, and program method from Bitquery. |
+
+### Source directories (this repo)
+
+| `clawhub install` | ClawHub listing | Folder |
+|-------------------|-----------------|--------|
+| `bitcoin-price-feed` | [bitquery-crypto-price-stream](https://clawhub.ai/divyn/bitquery-crypto-price-stream) | [`bitquery-bitcoin-price-skill/`](bitquery-bitcoin-price-skill/) · [`SKILL.md`](bitquery-bitcoin-price-skill/SKILL.md) |
+| `crypto-chart-usd` | [crypto-chart-usd](https://clawhub.ai/divyn/crypto-chart-usd) | [`crypto-chart-usd-skill/`](crypto-chart-usd-skill/) · [`SKILL.md`](crypto-chart-usd-skill/SKILL.md) |
+| `pumpfun-usd-price-stream` | [pumpfun-usd-price-stream](https://clawhub.ai/divyn/pumpfun-usd-price-stream) | [`pumpfun-skill/`](pumpfun-skill/) · [`SKILL.md`](pumpfun-skill/SKILL.md) |
+| `polymarket-real-time-trades` | [polymarket-real-time-trades](https://clawhub.ai/divyn/polymarket-real-time-trades) | [`polymarket-skill/`](polymarket-skill/) · [`SKILL.md`](polymarket-skill/SKILL.md) |
+| `stablecoin-payments` | [solana-stablecoin-payments-tracking](https://clawhub.ai/divyn/solana-stablecoin-payments-tracking) | [`stablecoin-payments-skill/`](stablecoin-payments-skill/) · [`SKILL.md`](stablecoin-payments-skill/SKILL.md) |
 
 ---
 
@@ -69,7 +81,7 @@ clawhub search "stablecoin solana"
 
 ### 3. Install the skills
 
-Install one or both skills by name (slug):
+Install one or more skills by name (slug):
 
 ```bash
 # Bitcoin price feed — real-time streaming BTC OHLC/volume from Bitquery
